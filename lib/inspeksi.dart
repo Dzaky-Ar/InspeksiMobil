@@ -320,7 +320,7 @@ class _HasilInspeksiPageState extends State<HasilInspeksiPage> {
                         backgroundColor: Colors.orange,
                       ),
                       onPressed: () {
-                        
+                        Navigator.push( context, MaterialPageRoute( builder: (context) => const Penilaian1(), ), );
                       },
                       child: const Text("Next"),
                     ),
