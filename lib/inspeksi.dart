@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../main.dart';
+import '../penilaian_1.dart';
 
 class HasilInspeksiPage extends StatefulWidget {
   const HasilInspeksiPage({super.key});
@@ -59,6 +60,7 @@ class _HasilInspeksiPageState extends State<HasilInspeksiPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(title),
+        const SizedBox(height: 6),
         Row(
           children: List.generate(10, (index) {
             int val = index + 1;
@@ -91,17 +93,20 @@ class _HasilInspeksiPageState extends State<HasilInspeksiPage> {
           }),
         ),
         const SizedBox(height: 6),
+        Text("Keterangan $title"),
+        const SizedBox(height: 6),
         TextField(
           maxLines: 3,
           decoration: InputDecoration(
-            hintText: "Keterangan $title",
+            hintText: "-keterangan 1 \n-keterangan 2 \n-keterangan 3",
+            hintStyle: const TextStyle(height: 2,fontSize: 12),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Color(0xFF00BFFF), width: 1),
+              borderSide: BorderSide(color: Color.fromARGB(255, 26, 42, 48), width: 1),
             ),
           ),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 20),
       ],
     );
   }
@@ -189,21 +194,31 @@ class _HasilInspeksiPageState extends State<HasilInspeksiPage> {
   Widget buildPerbaikanItem(int index) {
     final item = estimasiPerbaikan[index];
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 4),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      margin: const EdgeInsets.symmetric(vertical: 4), 
       decoration: BoxDecoration(
-        color: Color(0xFFF5ECFF),
         border: Border.all(color: Color(0xFFB88AFF)),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         children: [
           Expanded(
-            child: TextField(
-              controller: item["judul"],
-              decoration: const InputDecoration(
-                hintText: 'Tipe Perbaikan',
-                border: InputBorder.none,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  bottomLeft: Radius.circular(10),
+                ),
+              color: Color(0xFFB88AFF),
+              ),
+              child: TextField(
+                controller: item["judul"],
+                style: const TextStyle(fontSize: 13, color: Colors.white),
+                decoration: const InputDecoration(
+                  hintText: 'Tipe Perbaikan',
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(color: Colors.white)
+                ),
               ),
             ),
           ),
@@ -211,6 +226,7 @@ class _HasilInspeksiPageState extends State<HasilInspeksiPage> {
           Expanded(
             child: TextField(
               controller: item["harga"],
+              style: const TextStyle(fontSize: 13, color: Colors.black),
               decoration: const InputDecoration(
                 hintText: 'Masukkan harga',
                 border: InputBorder.none,
@@ -239,7 +255,7 @@ class _HasilInspeksiPageState extends State<HasilInspeksiPage> {
             children: [
               const Text("4/9", style: TextStyle(color: Colors.orange, fontSize: 18)),
               const SizedBox(height: 8),
-              const Text("Hasil Inspeksi", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              const Text("Hasil Inspeksi", style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
 
               const SizedBox(height: 16),
               buildRatingBar("Interior"),
@@ -268,8 +284,8 @@ class _HasilInspeksiPageState extends State<HasilInspeksiPage> {
               const SizedBox(height: 8),
               GestureDetector(
                 onTap: tambahPerbaikan,
-                child: Row(
-                  children: const [
+                child: const Row(
+                  children:  [
                     Icon(Icons.add, color: Color(0xFFB88AFF)),
                     SizedBox(width: 4),
                     Text(
@@ -303,7 +319,9 @@ class _HasilInspeksiPageState extends State<HasilInspeksiPage> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.orange,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        
+                      },
                       child: const Text("Next"),
                     ),
                   ),
